@@ -1,0 +1,53 @@
+# Tool configurations for the Agentic RAG system
+
+tools:
+  - name: rag_search
+    description: "从知识库中检索相关文档"
+    enabled: true
+    type: retrieval
+
+  - name: document_summary
+    description: "生成文档摘要"
+    enabled: true
+    type: generation
+
+  - name: table_analysis
+    description: "分析CSV/Excel表格数据"
+    enabled: true
+    type: analysis
+    supported_formats: ["csv", "xlsx"]
+
+  - name: image_understanding
+    description: "理解图片内容（基础版使用mock描述）"
+    enabled: true
+    type: multimodal
+    mock_enabled: true
+
+  - name: chart_analysis
+    description: "分析图表趋势和数据"
+    enabled: true
+    type: multimodal
+
+  - name: formula_explain
+    description: "解释数学/工程公式"
+    enabled: true
+    type: analysis
+
+  - name: report_generation
+    description: "生成结构化报告"
+    enabled: true
+    type: generation
+
+  - name: battery_data_analysis
+    description: "分析电池测试数据（电压、电流、温度、容量）"
+    enabled: true
+    type: domain
+
+tool_routing:
+  general_chat: []
+  knowledge_qa: ["rag_search"]
+  document_summary: ["document_summary", "rag_search"]
+  table_analysis: ["table_analysis"]
+  image_understanding: ["image_understanding"]
+  report_generation: ["report_generation", "rag_search"]
+  memory_query: []

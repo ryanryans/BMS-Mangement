@@ -1,0 +1,59 @@
+# Enterprise Agentic RAG System: main configuration
+# Secrets MUST go in .env, never here.
+
+service:
+  name: "Enterprise Agentic RAG Knowledge Base"
+  version: "0.2.0"
+  environment: "dev"
+
+rag:
+  chunk_size: 400
+  chunk_overlap: 40
+  top_k: 5
+  similarity_threshold: 0.10
+  max_sources: 5
+
+memory:
+  max_items: 1000
+  importance_threshold: 3
+  types:
+    - user_preference
+    - project_context
+    - task_history
+    - feedback_memory
+    - tool_preference
+
+agent:
+  max_tool_calls: 5
+  planning_enabled: true
+  supported_question_types:
+    - general_chat
+    - knowledge_qa
+    - document_summary
+    - table_analysis
+    - image_understanding
+    - report_generation
+    - memory_query
+
+tools:
+  table_analysis:
+    supported_formats: ["csv", "xlsx"]
+    max_rows: 10000
+  image_understanding:
+    mock_enabled: true
+    supported_formats: ["png", "jpg", "jpeg"]
+  report_generation:
+    templates_path: "config/prompt_templates.yaml"
+
+upload:
+  max_file_size_mb: 50
+  allowed_extensions:
+    - .txt
+    - .md
+    - .pdf
+    - .docx
+    - .csv
+    - .xlsx
+    - .png
+    - .jpg
+    - .jpeg
